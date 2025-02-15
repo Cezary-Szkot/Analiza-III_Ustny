@@ -1,0 +1,348 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{geometry} \geometry{margin=70pt,tmargin=55pt, bmargin=75pt}
+\usepackage[polish]{babel}
+\usepackage[OT4]{fontenc}
+\usepackage{polski}
+\usepackage{yfonts}
+\usepackage{indentfirst}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb} 
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{tcolorbox}        \tcbuselibrary{theorems}
+                              \tcbuselibrary{skins}
+\usepackage{tikz} 
+\usepackage{hyperref}
+\usepackage{graphicx}         \graphicspath{{img/}}
+\usepackage{braket}
+\usepackage{physics}
+\usepackage{tabularx}
+\usepackage{titlesec}         \titlelabel{\thetitle.\quad}
+\usepackage{chngcntr}
+\usepackage{titling}
+\usepackage{array}            \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+\usepackage{bredzenie}
+\usepackage{textgreek}
+\usepackage{gensymb}
+\usepackage[section]{placeins}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{subcaption}
+\usepackage{caption}          \captionsetup[table]{skip=2.5pt}\captionsetup[table]{labelsep=period}
+                              \captionsetup[figure]{skip=0pt}\captionsetup[figure]{labelsep=period}
+
+\DeclareFontFamily{U}{mathx}{\hyphenchar\font45}
+\DeclareFontShape{U}{mathx}{m}{n}{
+      <5> <6> <7> <8> <9> <10>
+      <10.95> <12> <14.4> <17.28> <20.74> <24.88>
+      mathx10
+      }{}
+\DeclareSymbolFont{mathx}{U}{mathx}{m}{n}
+\DeclareFontSubstitution{U}{mathx}{m}{n}
+\DeclareMathAccent{\widebar}{0}{mathx}{"73}
+
+\makeatletter
+\renewcommand\@biblabel[1]{#1}
+\makeatother
+
+\posttitle{\par\end{center}}
+\setlength{\droptitle}{-10pt}
+
+
+
+\counterwithout{subsection}{section} % Wyłącza resetowanie licznika podsekcji przy nowej sekcji
+\renewcommand{\thesubsection}{\arabic{subsection}} % Usuwa numer sekcji z numeracji podsekcji
+
+\titleformat{\subsection}[block] % Formatowanie nagłówka podsekcji
+{\normalfont\large\bfseries}
+{Pytanie \thesubsection. } % Dodaje "Pytanie X." przed tytułem
+{0em}
+{}
+
+
+
+
+%%%%%%%%%%
+% KOLORY %
+%%%%%%%%%%
+
+\definecolor{col1}{HTML}{ffcccc}
+\definecolor{col2}{HTML}{ccccff}
+\definecolor{darkred}{HTML}{8B0000}
+\definecolor{darkblue}{HTML}{00008B}
+\definecolor{goldenrod}{HTML}{FFDF42}
+\definecolor{lightgoldenrod}{HTML}{fff0a5}
+
+%%%%%%%%%
+% RAMKI %
+%%%%%%%%%
+
+
+\newtcbtheorem[auto counter]{dfn}{Definicja}{%
+  lower separated=false,
+  colback=white,
+  colframe=black,fonttitle=\bfseries,
+  colbacktitle=black,
+  coltitle=white,
+  sharp corners,
+  enhanced,
+  attach boxed title to top left={yshift=-0.1in,xshift=0.15in},
+  boxed title style={boxrule=0pt,colframe=white},
+  before upper=\vspace{5pt},
+  separator sign={.}
+}{def}
+
+\newtcbtheorem[auto counter]{tw}{Twierdzenie}{%
+  lower separated=false,
+  colback=white,
+  colframe=col2,fonttitle=\bfseries,
+  colbacktitle=col2,
+  coltitle=black,
+  sharp corners,
+  enhanced,
+  attach boxed title to top left={yshift=-0.1in,xshift=0.15in},
+  boxed title style={boxrule=0pt,colframe=white,},
+  before upper=\vspace{5pt},
+  separator sign={.}
+}{thm}
+
+\newtcolorbox{wn}[2][]{%
+  enhanced,colback=white,colframe=white,coltitle=black,
+  sharp corners,boxrule=1.5pt,
+  fonttitle=\bfseries,top=13pt,
+  attach boxed title to top left={yshift=-\tcboxedtitleheight/2, xshift=0pt},
+  boxed title style={tile,size=small,left=5pt,right=5pt, 
+  colback=lightgoldenrod,before upper=\strut},
+  title=#2,#1}
+
+
+%%%%%%%%%%%
+% KOMENDY %
+%%%%%%%%%%%
+
+\newcommand\R{\mathbb{R}}
+\newcommand\suni{\sum_{i=1}^{n}}
+\newcommand\sumi{\sum_{i=1}^{m}}
+\newcommand\sunj{\sum_{j=1}^{n}}
+\newcommand\sumj{\sum_{j=1}^{n}}
+\newcommand\at[2]{\left.#1\right|_{#2}}
+\newcommand\dz[2]{\left\langle #1,\, #2 \right\rangle}
+\newcommand{\id}{\mathrm{id}}
+
+\makeatletter
+\renewcommand*\env@matrix[1][\arraystretch]{%
+  \edef\arraystretch{#1}%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{*\c@MaxMatrixCols c}}
+\makeatother
+
+
+
+\title{\begin{Huge}Quoddam pium votum, maximatione examinis oralis ex analysi auncupatum – ad corda fovenda populo studiosorum, pro salute servanda ab infausto spectro mortis\end{Huge} \\ \begin{LARGE} (non transitus disciplinae) \end{LARGE}}
+
+%\title{\begin{LARGE}{PEWNE ŻYCZENIE ZBOŻNE, \\ MAKSOWANIEM USTNEGO Z ANALIZY ZWANE,}\end{LARGE} \\ ku pożytkowi debilnemu ludowi studenckiemu}
+\author{Marcel Tartanus}
+\date{\today}
+
+
+
+
+\begin{document}
+\maketitle
+
+\section*{\centering GEOMETRIA RÓŻNICZKOWA}
+
+Odpowiedzi na pierwsze sześć pytań, których nie zdążyłem jeszcze przepisać do latexa, można znaleźć na dysku \url{https://drive.google.com/drive/folders/1cEebV2E7BEeXJyBxo_TQnKqzHyMKAuzH?usp=sharing}.
+
+\subsection{przestrzeń topologiczna, mapa, atlas klasy \texorpdfstring{$C^k$}{TEXT}, rozmaitość różniczkowa}
+
+\begin{dfn}[]{Przestrzeń topologiczna}{topologia}
+  Przestrzenią topologiczną nazywamy zbiór $X$ z nadaną strukturą topologiczną (\textit{topologią}) $\tau$, która to jest rodziną podzbiorów $X$, zwanych otwartymi, spełniającą następujące aksjomaty:
+  \begin{enumerate}
+    \item $\emptyset, X\in \tau$,
+    \item $\forall_{i\in I}\ A_i \in \tau \implies \bigcap\limits_{i\in I}{A_i}\in\tau$, gdzie $I$ to \underline{skończony} zbiór indeksów,
+    \item $\forall_{i\in I}\ A_i \in \tau \implies \bigcup\limits_{i\in I}{A_i}\in\tau$, gdzie $I$ to \underline{dowolny} zbiór indeksów.
+  \end{enumerate}
+\end{dfn}
+
+
+
+
+
+
+
+
+
+\subsection{twierdzenie o powierzchniach zanurzonych}
+
+\subsection{przestrzeń styczna do rozmaitości, wektor styczny do danej krzywej}
+
+\subsection{baza przestrzeni stycznej związana z danym układem współrzędnych, wpływ zmiany układu współrzędnych na współczynniki wektora}
+
+\subsection{definicja odwzorowania stycznego, transport wektorów rozmaitościami, wzór na odwzorowanie styczne w danych układach współrzędnych}  \label{sec:pchnięcie}
+
+\subsection{wiązka styczna, pole wektorowe}
+
+
+
+
+
+
+
+
+
+
+\subsection{przestrzeń kostyczna do rozmaitości, kowektory}
+
+\begin{dfn}{Przestrzeń kostyczna}{prz.kostyczna}
+  Przestrzeń dualną do przestrzeni stycznej $T_pM$, czyli $T_p^*M=L(T_pM,\,\mathbb{R})$ określamy mianem \textit{kostycznej} w punkcie $p$ do rozmaitości $M$. Jej elementami są \textit{kowektory} $\omega_p\in T_p^*M$.
+\end{dfn}
+
+\begin{dfn}{Różniczka funkcji $f:M\to\R$}{różniczka}
+  Różniczką funkcji $f:M\to\mathbb{R}$ w punkcie $p$ nazywamy odwzorowanie
+  \[ (\dd{f})_p: T_pM\ni v_p\mapsto v_p(f)\in\mathbb{R}. \]
+  Jest ono liniowe ze względu na $v_p$, więc $(\dd{f})_p$ jest elementem przestrzeni kostycznej $T_p^*M$.
+\end{dfn}
+
+  
+
+
+
+
+
+
+
+
+
+
+\subsection{baza przestrzeni kostycznej związana z danym układem współrzędnych, wpływ zmiany układu współrzędnych na współczynniki kowektora}
+
+Mając zdefiniowaną różniczkę funkcji rzeczywistej na rozmaitości (def. \ref{def:różniczka}) możemy się teraz zastanowić nad \textbf{bazą przestrzeni kostycznej}. Weźmy sobie mapę $\phi: M \to \R^n$, taką że dla $q\in M$
+\[ \phi(q) = \mqty[x_1(q) \\ \vdots \\ x_n(q)]\text{, gdzie $x_i(q)$ to $i$-ta współrzędna punktu $q$.} \]
+Sprawdźmy czy różniczki funkcji $x_i: M \to \R$ stanowią bazę dualną do $\set{\at{\partialderivative{x_i}}{p}}$:
+
+\[ (\dd{x_i})_p \at{\partialderivative{x_j}}{p} = \at{\partialderivative{x_i}{x_j}}{p} = \at{\derivative{t}(x_i\circ\gamma_j(t))}{t=0} = \at{\derivative{(t\,\delta_{ij})}{t}}{t=0} = \delta_{ij}. \]
+Przedostatnia równość wynika z tego, że $\phi\circ\gamma_j = (0,\ldots, t, \ldots, 0)$. Zatem tak, zbiór różniczek $\set{(\dd{x_i})_p}$ stanowi bazę dualną do $\set{\at{\partialderivative{x_i}}{p}}$, więc jest bazą przestrzeni kostycznej $T^*_pM$.  
+
+
+Jak wygląda \textbf{rozkład różniczki} $(\dd{f})_p$, czyli kowektora, w bazie $\set{(\dd{x_i})_p}$? Korzystając z dualności baz:
+\[
+  (\dd{f})_p \at{\pdv{x_i}}{p} 
+  = \sunj \alpha_j (\dd{x_j})_p \at{\partialderivative{x_i}}{p} = \sunj \alpha_j \delta_{ji} = \alpha_i. 
+\]
+Z drugiej strony posiłkując się definicją \ref{def:różniczka}:
+\[ 
+  (\dd{f})_p \at{\pdv{x_i}}{p} = \at{\pdv{x_i}}{p} (f) = \at{\pdv{\left( f\circ\phi^{-1}(\vec{x}) \right)}{x_{i}}}{\vec{x}=\phi(p)}.
+\]
+Porównując ze sobą wzory otrzymujemy rozkład postaci:
+\begin{equation}\label{eq:rozkład_różniczki}
+(\dd{f})_p = \suni \at{\pdv{\left( f\circ\phi^{-1}(\vec{x}) \right)}{x_{i}}}{\vec{x}=\phi(p)} (\dd{x_i})_p = \suni \at{\pdv{f}{x_i}}{p} (\dd{x_i})_p,
+\end{equation}
+gdzie wyraz po drugiej równości oznacza uproszczoną notację. Funkcji na rozmaitości nie można różniczkować jak te na przestrzeniach euklidesowych, o ile nie obłoży się ich jakąś mapą.
+
+Rozważmy kolejną mapę $\widetilde{\phi}$ na tej samej rozmaitości. Jaki będzie \textbf{rozkład różniczki w innej bazie} $\set{(\dd{\widetilde{x}_i})_p}$ związanej z nowym układem współrzędnych $\widetilde{\phi}$? 
+\[
+  (\dd{f})_p = \suni \at{\pdv{f}{x_i}}{p} \id^*(dx_i)_p = \suni \at{\pdv{f}{x_i}}{p} \sunj \at{\pdv{x_i}{\widetilde{x}_j}}{p} (\dd{\widetilde{x}_j})_p = 
+  \sunj \underbrace{\left(\suni \at{\pdv{f}{x_i}}{p} \at{\pdv{x_i}{\widetilde{x}_j}}{p}\right)}_{\text{wsp. w nowej bazie}} (\dd{\widetilde{x}_j})_p,
+\]
+gdzie $\id^*$ to odwzorowanie kostyczne do identyczności $\id=\phi\circ\widetilde{\phi}^{-1}$. Więcej na temat odwzorowań kostycznych można znaleźć w odpowiedzi do następnego pytania. Powyższy wynik jest iloczynem kowektora (macierz $1\times n$) w starej bazie i macierzy Jacobiego przejścia między układami współrzędnych $\pdv{(x_1,\ldots x_n)}{(\widetilde{x}_1,\ldots \widetilde{x}_n)}$:
+\[
+\at{\mqty[\displaystyle\suni \pdv{f}{x_i} \pdv{x_i}{\widetilde{x}_1}\ \cdots\ \suni \pdv{f}{x_i} \pdv{x_i}{\widetilde{x}_n}]}{p} = \at{\mqty[\displaystyle\pdv{f}{x_1}\ \cdots\ \pdv{f}{x_n}]}{p}
+ \at{\begin{bmatrix}[1.5]
+   \pdv{x_1}{\widetilde{x}_1} & \pdv{x_1}{\widetilde{x}_2} & \cdots & \pdv{x_1}{\widetilde{x}_n} \\
+   \pdv{x_2}{\widetilde{x}_1} & \pdv{x_2}{\widetilde{x}_2} & \cdots & \pdv{x_2}{\widetilde{x}_n} \\
+   \vdots  & \vdots  & \ddots & \vdots  \\
+   \pdv{x_n}{\widetilde{x}_1} & \pdv{x_n}{\widetilde{x}_2} & \cdots & \pdv{x_n}{\widetilde{x}_n}
+ \end{bmatrix}}{p}.
+\]
+
+
+
+
+
+
+
+
+
+\subsection{definicja odwzorowania kostycznego, transport kowektorów między rozmaitościami, wzór na odwzorowanie kostyczne w danych układach współrzędnych} \label{sec:cofnięcie}
+
+\begin{dfn}{Odwzorowanie kostyczne}{cofnięcie}
+  Niech $M$ i $N$ będą rozmaitościami różniczkowymi klasy $C^k$, a $F:M\to N$ funkcją klasy $C^k$. Odwzorowanie $F^*: T^*_{F(p)}N\to T^*_p M$, zadane warunkiem
+  \[
+  \forall_{\omega_{F(p)}\in T^*_{F(p)}N}\, \forall_{v_{p}\in T_p M}\ 
+  \left( F^*\omega_{F(p)} \right)(v_p) = \omega_{F(p)}\left( F_* v_p \right),
+  \]
+  nazywamy odwzorowaniem kostycznym do $F$, lub inaczej cofnięciem kowektorów.
+\end{dfn}
+
+W odpowiedzi na pytanie \ref{sec:pchnięcie}. pokazano, że pchnięcie wektorów możemy wyrazić za pomocą wzoru:
+\[
+F_*\left( \sumi v_{i} \at{\pdv{x_i}}{p} \right) = \sum_{i,\,j} [F'_{\psi\phi}]_{ji}\, v_i \at{\pdv{y_j}}{F(p)}.
+\]
+Posługując się nim oraz definicją odwzorowania kostycznego, można rozpisać:
+\begin{align*}
+  & \left( F^*\Biggl( \sunj \omega_j(F(p))\, (\dd{y_{j}})_{F(p)} \Biggr) \right) \Biggl( \sumi v_i \at{\pdv{x_i}}{p}  \Biggr) 
+  =  \left( \sunj \omega_j(F(p))\, (\dd{y_j})_{F(p)} \right) \Biggl( F_*\Biggl( \sumi v_i \at{\pdv{x_i}}{p} \Biggr) \Biggr) \\
+  &=  \left( \sunj \omega_j(F(p))\, (\dd{y_j})_{F(p)} \right) \Biggl( \sum_{i,\,j} [F'_{\psi\phi}]_{ji}\,v_i\at{\pdv{y_j}}{F(p)} \Biggr)  
+  =  \sunj \omega_{j}(F(p)) \sumi [F'_{\psi\phi}]_{ji}\,v_i  \\
+  &=  \sunj\sumi \omega_{j}(F(p))\,[F'_{\psi\phi}]_{ji}\,v_i
+  = \sunj\sumi \omega_{j}(F(p))\,[F'_{\psi\phi}]_{ji}\, \bigl( \dd{x_i} \bigr)_p (v_p)
+  = \sunj\sumi \bigl([F'_{\psi\phi}]^T\bigr)_{ij}\, \omega_{j}(F(p)) \bigl( \dd{x_i} \bigr)_p (v_p)
+\end{align*}
+Uzyskujemy zatem \textbf{wzór na odwzorowanie kostyczne} w układach współrzędnych (mapach) $\psi$ i $\phi$ na rozmaitościach odpowiednio $N$ i $M$:
+\begin{equation*}
+  \color{darkblue} F^* \omega_{F(p)} = \sunj\sumi \bigl([F'_{\psi\phi}]^T\bigr)_{ij}\, \omega_{j}(F(p)) \bigl( \dd{x_i} \bigr)_p. 
+\end{equation*}
+Widzimy więc, że cofnięcie kowektorów jest operacją liniową o macierzy $[F'_{\psi\phi}]^T$.
+
+
+
+
+
+
+
+
+\subsection{wiązka kostyczna, 1-forma, k-forma}
+
+\begin{dfn}{Wiązka kostyczna}{wiązka_kostyczna}
+  Wiązka kostyczna to suma rozłączna przestrzeni kostycznych w każdym punkcie rozmaitości
+  \[
+  T^*M = \bigcup_{p\in M} \set{p}\times T^*_pM.
+  \]
+\end{dfn}
+
+\begin{dfn}{Pole kowektorowe (1-forma)}{1-forma}
+  Pole kowektorowe jest funkcją $\omega:M\to T^*M$, taką że 
+  \[
+  M\ni p\mapsto \omega_p = \suni (\omega_p)_i (\dd{x_i})_p \in T_p^*M.
+  \]
+  Traktując $(\omega_p)_i$ jako odwzorowanie na $M$ oraz wprowadzając $\omega_i: M\ni p \mapsto (\omega_p)_i\in\R$, pole $\omega$ można zapisać jako:
+  \[
+  \omega(p) = \suni \omega_i(p) (\dd{x_i})_p.
+  \]
+  Jednoformami można \textit{działać na pola wektorowe} $V\in\mathfrak{X}(M)$, przez co rozumiemy: $\at{\omega(V)}{p} = \omega_p(v_p)$.
+  Wynikiem takiej operacji jest funkcja $\omega(V):M\to M.$
+\end{dfn}
+
+Jak wygląda 1-forma funkcji rzeczywistej na rozmaitości? Jest to odwzorowanie $\dd{f}: p\mapsto (\dd{f})_p$, gdzie $(\dd{f})_p$ to różniczka funkcji $f$ w punkcie $p$ o rozkładzie w bazie $\set{(\dd{x_i})_p}$ (\ref{eq:rozkład_różniczki}). Należy tutaj poczynić pewną \textit{uwagę}. Dla każdej funkcji $f$ istnieje 1-forma $\omega$, taka że $\omega=\dd{f}$, ale nie dla każdej 1-formy istnieje funkcja z różniczką odpowiadającą 1-formie. 
+
+
+
+
+
+
+\subsection{iloczyn zewnętrzny, iloczyn wewnętrzny, różniczka zewnętrzna}
+
+
+
+\end{document}
+
+
