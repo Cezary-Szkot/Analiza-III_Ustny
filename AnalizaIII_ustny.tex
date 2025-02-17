@@ -381,6 +381,21 @@ W powyższej definicji pisałem o antysymetrycznych $k$-liniowych funkcjonałach
 Więcej informacji o tensorach i iloczynie tensorowym, który pojawił się w powyższej definicji, można przeczytać w moich notatkach z ćwiczeń ze Zglinickim \url{https://drive.google.com/file/d/16qXaC4W0_puQSz4xwP2QBLQm9_V_2kir/view?usp=sharing}.
 
 
+\begin{dfn}{Iloczyn wewnętrzny (skalarny)}{iloczyn_wew}
+  Niech $V$ będzie przestrzenią wektorową nad ciałem $\mathbb{K}$ ($\R$ lub $\mathbb{C}$). Odwzorowanie $V\times V\ni(v,w)\to\braket{v}{w}\in\mathbb{K}$ określamy \textit{iloczynem wewnętrznym} (\textit{skalarnym}), jeśli dla $v, w, w_1, w_2\in V$ oraz $\lambda_1, \lambda_2\in\mathbb{K}$ mamy:
+  \begin{enumerate}
+    \item $\braket{v}{\lambda_1 w_1 + \lambda_2 w_2} = \lambda_1\braket{v}{w_1} + \lambda_2\braket{v}{w_2}$ (liniowość w drugim argumencie),
+    \item dla $\mathbb{K}=\R$:  $\braket{v}{w}=\braket{w}{v}$ (symetria),
+          dla $\mathbb{K}=\mathbb{C}$: $\braket{v}{w}=\overline{\braket{w}{v}}$ (hermitowskość),
+    \item $\braket{v}{v}>0$ dla $v\neq\vec{0}$ (dodatniość).
+  \end{enumerate}
+  Dla $\mathbb{K}=\R$ iloczyn skalarny sprowadza się do dodatnio-określonej, symetrycznej formy dwuliniowej 
+\end{dfn}
+
+
+
+
+
 
 
 
@@ -396,6 +411,46 @@ Więcej informacji o tensorach i iloczynie tensorowym, który pojawił się w po
 \subsection{tensor metryczny, forma objętości}\label{sec:tensor_metryczny_vol}
 
 
+\begin{dfn}{Tensor metryczny}{tensor_metryczny}
+  Tensorem metrycznym na rozmaitości różniczkowej $M$ zwiemy odwzorowanie $g:M\to T^*M\otimes T^*M$, takie że $M\ni p\mapsto g_p\in T^*M\otimes T^*M$, gdzie $g_p$ jest 
+  \begin{itemize}
+    \item \textbf{symetryczną} $\forall_{v, w\in T_pM}\ g_p(v,w) = g_p(w,v)$,
+    \item \textbf{dodatnio-określoną} $\forall_{v\in T_pM\setminus\set{\vec{0}}}\ g_p(v,v)>0$,
+    \item \textbf{niezdegenerowaną} $\forall_{w\in T_pM}:\ (\forall_{v\in T_pM}\ g_p(v,w)=0)\implies w=\vec{0}$,
+  \end{itemize}
+  dwuliniową formą na $T_pM\times T_pM$. Innymi słowy $g$ jest cięciem wiązki tensorowej $T^*M\otimes T^*M$, które zadaje \textit{lokalnie}, w punkcie $p$, iloczyn skalarny $g_p$. We współrzędnych lokalnych $(x^1,\ldots,x^n)$ tensor metryczny można zapisać jako:
+  \[
+  g = \sum_{i,j=1}^{n}g_{ij}(\vec{x})\dd{x^i}\otimes\dd{x^j}.
+  \]
+\end{dfn}
+Ze względu na dodatniość dwuformy $g_p$ warunek niezdegenerowania jest zbędny. Podaje się go jednak często, bo w niektórych dziedzinach rozważa się niekoniecznie dodatnio-określone iloczyny skalarne (np. w OTW).
+Współczynniki tensora metrycznego zapisujemy z dolnymi indeksami. Wyrazy postaci $g^{ij}$ rozumiemy jako współczynniki macierzy odwrotnej do $[g_{ij}]$, więc $g^{ik}g_{kj}=\delta^i_j$. Niech \( [g_{ij}] \) będzie macierzą tensora metrycznego \( g \) w bazie związanej z układem współrzędnych \( (x^i) \), a \( [\widetilde{g}_{ab}] \) macierzą tego tensora w bazie związanej z układem współrzędnych \( (y^a) \). Przejście między nimi odbywa się za pomocą macierzy Jacobiego  $J = \pdv{(x^1,\ldots,x^n)}{(y^1,\ldots,y^n)}$:  
+\[
+[\widetilde{g}_{ab}] = J^T [g_{ij}] J.
+\]
+
+\begin{dfn}{Forma objętości}{vol}
+  Formą objętości na rozmaitości różniczkowej $M$ nazywamy $n$-formę różniczkową postaci:
+  \[
+  vol = \pm\sqrt{\det g}\ \dd{x^1}\wedge\cdots\wedge\dd{x^n}.
+  \]
+  Znak formy zależy od orientacji układu współrzędnych, w którym została wyrażona.
+\end{dfn}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Co to znaczy, że odwzorowanie zachowuje orientację rozmaitości?}{orientacja}
 
 
 
