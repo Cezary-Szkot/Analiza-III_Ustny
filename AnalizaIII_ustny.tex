@@ -35,8 +35,8 @@
 \usepackage{multirow}
 \usepackage{makecell}
 \usepackage{subcaption}
-\usepackage{caption}          \captionsetup[table]{skip=2.5pt}\captionsetup[table]{labelsep=period}
-                              \captionsetup[figure]{skip=0pt}\captionsetup[figure]{labelsep=period}
+\usepackage{caption}          %\captionsetup[table]{skip=2.5pt}\captionsetup[table]{labelsep=period}
+                              %\captionsetup[figure]{skip=0pt}\captionsetup[figure]{labelsep=period}
 
 \DeclareFontFamily{U}{mathx}{\hyphenchar\font45}
 \DeclareFontShape{U}{mathx}{m}{n}{
@@ -131,10 +131,11 @@
 \newcommand\suni{\sum_{i=1}^{n}}
 \newcommand\sumi{\sum_{i=1}^{m}}
 \newcommand\sunj{\sum_{j=1}^{n}}
-\newcommand\sumj{\sum_{j=1}^{n}}
+\newcommand\sumj{\sum_{j=1}^{m}}
 \newcommand\at[2]{\left.#1\right|_{#2}}
 \newcommand\dz[2]{\left\langle #1,\, #2 \right\rangle}
 \newcommand{\id}{\mathrm{id}}
+\newcommand{\sgn}{\operatorname{sgn}}
 
 \makeatletter
 \renewcommand*\env@matrix[1][\arraystretch]{%
@@ -160,7 +161,7 @@
 
 \section*{\centering GEOMETRIA RÓŻNICZKOWA}
 
-Odpowiedzi na pierwsze sześć pytań, których nie zdążyłem jeszcze przepisać do latexa, można znaleźć na dysku \url{https://drive.google.com/drive/folders/1cEebV2E7BEeXJyBxo_TQnKqzHyMKAuzH?usp=sharing}.
+Odpowiedzi na pierwsze sześć pytań, których nie zdążyłem jeszcze przepisać do latexa, można znaleźć na dysku \url{https://drive.google.com/drive/folders/1cEebV2E7BEeXJyBxo_TQnKqzHyMKAuzH?usp=sharing}. W odpowiedziach do pytań, rozmaitość $M$ domyślnie jest wymiaru $n$, chyba że występuje w parze z rozmaitością $N$, wówczas $\dim{M}=m$ a $\dim{N}=n$.
 
 \subsection{przestrzeń topologiczna, mapa, atlas klasy \texorpdfstring{$C^k$}{TEXT}, rozmaitość różniczkowa}
 
@@ -299,7 +300,7 @@ Posługując się nim oraz definicją odwzorowania kostycznego, można rozpisać
 \end{align*}
 Uzyskujemy zatem \textbf{wzór na odwzorowanie kostyczne} w układach współrzędnych (mapach) $\psi$ i $\phi$ na rozmaitościach odpowiednio $N$ i $M$:
 \begin{equation*}
-  \color{darkblue} F^* \omega_{F(p)} = \sunj\sumi \bigl([F'_{\psi\phi}]^T\bigr)_{ij}\, \omega_{j}(F(p)) \bigl( \dd{x_i} \bigr)_p. 
+  \color{darkred} F^* \omega_{F(p)} = \sunj\sumi \bigl([F'_{\psi\phi}]^T\bigr)_{ij}\, \omega_{j}(F(p)) \bigl( \dd{x_i} \bigr)_p. 
 \end{equation*}
 Widzimy więc, że cofnięcie kowektorów jest operacją liniową o macierzy $[F'_{\psi\phi}]^T$.
 
@@ -315,11 +316,11 @@ Widzimy więc, że cofnięcie kowektorów jest operacją liniową o macierzy $[F
 \begin{dfn}{Wiązka kostyczna}{wiązka_kostyczna}
   Wiązka kostyczna to suma rozłączna przestrzeni kostycznych w każdym punkcie rozmaitości
   \[
-  T^*M = \bigcup_{p\in M} \set{p}\times T^*_pM.
+  T^*M = \bigcup_{p\in M} \set{p}\times T^*_pM = \set{(p, \omega)| p\in M,\, \omega\in T^*_p M}.
   \]
 \end{dfn}
 
-\begin{dfn}{Pole kowektorowe (1-forma)}{1-forma}
+\begin{dfn}{Pole kowektorowe (1-forma różniczkowa)}{1-forma}
   Pole kowektorowe jest funkcją $\omega:M\to T^*M$, taką że 
   \[
   M\ni p\mapsto \omega_p = \suni (\omega_p)_i (\dd{x_i})_p \in T_p^*M.
@@ -329,17 +330,82 @@ Widzimy więc, że cofnięcie kowektorów jest operacją liniową o macierzy $[F
   \omega(p) = \suni \omega_i(p) (\dd{x_i})_p.
   \]
   Jednoformami można \textit{działać na pola wektorowe} $V\in\mathfrak{X}(M)$, przez co rozumiemy: $\at{\omega(V)}{p} = \omega_p(v_p)$.
-  Wynikiem takiej operacji jest funkcja $\omega(V):M\to M.$
+  Wynikiem takiej operacji jest funkcja $\omega(V):M\to \R.$
 \end{dfn}
 
 Jak wygląda 1-forma funkcji rzeczywistej na rozmaitości? Jest to odwzorowanie $\dd{f}: p\mapsto (\dd{f})_p$, gdzie $(\dd{f})_p$ to różniczka funkcji $f$ w punkcie $p$ o rozkładzie w bazie $\set{(\dd{x_i})_p}$ (\ref{eq:rozkład_różniczki}). Należy tutaj poczynić pewną \textit{uwagę}. Dla każdej funkcji $f$ istnieje 1-forma $\omega$, taka że $\omega=\dd{f}$, ale nie dla każdej 1-formy istnieje funkcja z różniczką odpowiadającą 1-formie. 
 
 
+\begin{dfn}{k-forma różniczkowa}{k-forma}
+  Niech $\Lambda^k T_pM = \Lambda^k_pM$ oznacza przestrzeń liniową całkowicie antysymetrycznych $k$-liniowych funkcjonałów na $(T_pM)^k=T_pM\times\cdots\times T_pM$. Formą różniczkową nazwiemy funkcję $\omega: M\to \bigcup_{p\in M} \Lambda^k_p M$, taką że $\omega(p)\in \Lambda^k_p M$. Zbiór wszystkich $k$-form różniczkowych na $M$ oznaczamy jako $\Lambda^k M$. Lokalnie, tj. w otoczeniu ustalonego punktu $p$ rozmaitości, w dziedzinie pewnego układu współrzędnych $\phi$, dowolną $k$-formę $\omega$ można przedstawić jednoznacznie w postaci:
+  \[
+  \omega = \sum_{1\leq i_1 < \cdots < i_k \leq n} \omega_{i_1,\ldots, i_k}(\vec{x}) \dd{x}_{i_1}\wedge\cdots\wedge\dd{x}_{i_k} 
+  = \frac{1}{k!}\,\omega_{i_1,\ldots, i_k}(\vec{x})\dd{x}^{i_1}\wedge\cdots\wedge\dd{x}^{i_k},
+  \]
+  gdzie $\omega_{i_1,\ldots, i_k}$ jest antysymetrycznym współczynnikiem a $\vec{x}=\phi(p)$. W drugiej równości zastosowano konwencję sumacyjną Einsteina.
+\end{dfn}
+W tym miejscu dodefiniujemu, że $\Lambda^0_p M=\mathbb{R}$. Bazą przestrzeni $\Lambda^k_p M$ jest zbiór iloczynów zewnętrznych kowektorów $\set{\dd{x_{i_1}}\wedge\cdots\wedge\dd{x_{i_k}}}_{1\leq i_1<\cdots<i_k\leq n}$, więc jej wymiar wynosi $\binom{n}{k}$. Warto zauważyć, iż $\dim{\Lambda^k_p M}=\dim{\Lambda^{n-k}_p M}$.
+
+W powyższej definicji pisałem o antysymetrycznych $k$-liniowych funkcjonałach. Pod tym hasłem kryją się antysymetryczne $k$-formy rozumiane w szerszym sensie, tak jak na Algebrze I. Nie użyłem tego sformułowania, by uniknąć ich poplątania z formami różniczkowymi przez czytelnika. Od tej chwili notacja sumacyjna Einsteina będzie się coraz częściej pojawiała. Została ona dobrze wytłumaczona w skrypcie Alatosa (\url{https://www.fuw.edu.pl/~alatos/analiza-wyklady.pdf} str. 16 -- 22), więc nie poświęcimy jej tu więcej miejsca.
 
 
 
 
-\subsection{iloczyn zewnętrzny, iloczyn wewnętrzny, różniczka zewnętrzna}
+
+
+
+
+
+
+
+
+
+\subsection{iloczyn zewnętrzny, iloczyn wewnętrzny, różniczka zewnętrzna} \label{sec:iloczyny_różniczka}
+
+\begin{dfn}{Iloczyn zewnętrzny}{iloczyn_zew}
+  Niech $V$ będzie przestrzenią wektorową. Przez iloczyn zewnętrzny wektorów $v_1,\ldots,v_k\in V$ rozumiemy
+  \[
+  v_1\wedge\cdots\wedge v_k = \sum_{\sigma\in S_k} \sgn(\sigma)\, v_{\sigma(1)}\otimes\cdots\otimes v_{\sigma(k)}. 
+  \]
+  Przestrzenią liniową jest również $T^*_p M$, więc rozważać można iloczyn zewnętrzny kowektorów. W takim przypadku dla $\omega_1,\ldots,\omega_k\in T^*_p M$ oraz $v_1,\ldots,v_k\in T_p M$:
+  \[
+  \Bigl( \omega_1\wedge\cdots\wedge\omega_k \Bigr)(v_1\wedge\cdots\wedge v_k) = \sum_{\sigma\in S_k} \sgn(\sigma)\, \omega_{\sigma(1)}(v_1)\cdots \omega_{\sigma(k)}(v_k) \in \Lambda^k_p M.
+  \]
+  Wśród własności iloczynu zewnętrznego można wymienić:
+  \begin{itemize}
+    \item \textbf{antysymetryczność} $\omega_1\wedge\cdots\wedge\omega_i\wedge\cdots\wedge\omega_j\wedge\cdots\wedge\omega_k = -\omega_1\wedge\cdots\wedge\omega_j\wedge\cdots\wedge\omega_i\wedge\cdots\wedge\omega_k$,
+    \item \textbf{wieloliniowość} $\omega_1\wedge\cdots\wedge\,(\alpha\omega_i+\beta\widetilde{\omega}_i)\,\wedge\cdots\wedge\omega_k = \alpha(\omega_1\wedge\cdots\wedge\omega_i\wedge\cdots\wedge\omega_k) + \beta(\omega_1\wedge\cdots\wedge\widetilde{\omega}_i\wedge\cdots\wedge\omega_k)$,
+    \item \textbf{łączność} $(\omega_1\wedge\cdots\wedge\omega_k)\wedge(\widetilde{\omega}_1\wedge\cdots\wedge\widetilde{\omega}_n)=\omega_1\wedge\cdots\wedge\omega_k\wedge\widetilde{\omega}_1\wedge\cdots\wedge\widetilde{\omega}_n$.
+  \end{itemize}
+\end{dfn}
+Więcej informacji o tensorach i iloczynie tensorowym, który pojawił się w powyższej definicji, można przeczytać w moich notatkach z ćwiczeń ze Zglinickim \url{https://drive.google.com/file/d/16qXaC4W0_puQSz4xwP2QBLQm9_V_2kir/view?usp=sharing}.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{tensor metryczny, forma objętości}\label{sec:tensor_metryczny_vol}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
