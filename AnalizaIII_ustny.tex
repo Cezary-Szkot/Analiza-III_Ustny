@@ -102,9 +102,9 @@
 \newtcbtheorem[auto counter]{tw}{Twierdzenie}{%
   lower separated=false,
   colback=white,
-  colframe=col2,fonttitle=\bfseries,
-  colbacktitle=col2,
-  coltitle=black,
+  colframe=darkblue,fonttitle=\bfseries,
+  colbacktitle=darkblue,
+  coltitle=white,
   sharp corners,
   enhanced,
   attach boxed title to top left={yshift=-0.1in,xshift=0.15in},
@@ -144,6 +144,18 @@
   \let\@ifnextchar\new@ifnextchar
   \array{*\c@MaxMatrixCols c}}
 \makeatother
+
+\DeclareFontFamily{U}{MnSymbolC}{}
+\DeclareSymbolFont{MnSyC}{U}{MnSymbolC}{m}{n}
+\DeclareFontShape{U}{MnSymbolC}{m}{n}{
+    <-6>  MnSymbolC5
+   <6-7>  MnSymbolC6
+   <7-8>  MnSymbolC7
+   <8-9>  MnSymbolC8
+   <9-10> MnSymbolC9
+  <10-12> MnSymbolC10
+  <12->   MnSymbolC12}{}
+\DeclareMathSymbol{\intprod}{\mathbin}{MnSyC}{'270}
 
 
 
@@ -344,7 +356,7 @@ Jak wygląda 1-forma funkcji rzeczywistej na rozmaitości? Jest to odwzorowanie 
   \]
   gdzie $\omega_{i_1,\ldots, i_k}$ jest antysymetrycznym współczynnikiem a $\vec{x}=\phi(p)$. W drugiej równości zastosowano konwencję sumacyjną Einsteina.
 \end{dfn}
-W tym miejscu dodefiniujemu, że $\Lambda^0_p M=\mathbb{R}$. Bazą przestrzeni $\Lambda^k_p M$ jest zbiór iloczynów zewnętrznych kowektorów $\set{\dd{x_{i_1}}\wedge\cdots\wedge\dd{x_{i_k}}}_{1\leq i_1<\cdots<i_k\leq n}$, więc jej wymiar wynosi $\binom{n}{k}$. Warto zauważyć, iż $\dim{\Lambda^k_p M}=\dim{\Lambda^{n-k}_p M}$.
+W tym miejscu dodefiniujemu, że $\Lambda^0_p M=\mathbb{R}$ oraz $\Lambda^0M=C^{\infty}(M)$. Bazą przestrzeni $\Lambda^k_p M$ jest zbiór iloczynów zewnętrznych kowektorów $\set{\dd{x_{i_1}}\wedge\cdots\wedge\dd{x_{i_k}}}_{1\leq i_1<\cdots<i_k\leq n}$, więc jej wymiar wynosi $\binom{n}{k}$. Warto zauważyć, iż $\dim{\Lambda^k_p M}=\dim{\Lambda^{n-k}_p M}$.
 
 W powyższej definicji pisałem o antysymetrycznych $k$-liniowych funkcjonałach. Pod tym hasłem kryją się antysymetryczne $k$-formy rozumiane w szerszym sensie, tak jak na Algebrze I. Nie użyłem tego sformułowania, by uniknąć ich poplątania z formami różniczkowymi przez czytelnika. Od tej chwili notacja sumacyjna Einsteina będzie się coraz częściej pojawiała. Została ona dobrze wytłumaczona w skrypcie Alatosa (\url{https://www.fuw.edu.pl/~alatos/analiza-wyklady.pdf} str. 16 -- 22), więc nie poświęcimy jej tu więcej miejsca.
 
@@ -384,12 +396,28 @@ Więcej informacji o tensorach i iloczynie tensorowym, który pojawił się w po
 \begin{dfn}{Iloczyn wewnętrzny (skalarny)}{iloczyn_wew}
   Niech $V$ będzie przestrzenią wektorową nad ciałem $\mathbb{K}$ ($\R$ lub $\mathbb{C}$). Odwzorowanie $V\times V\ni(v,w)\to\braket{v}{w}\in\mathbb{K}$ określamy \textit{iloczynem wewnętrznym} (\textit{skalarnym}), jeśli dla $v, w, w_1, w_2\in V$ oraz $\lambda_1, \lambda_2\in\mathbb{K}$ mamy:
   \begin{enumerate}
-    \item $\braket{v}{\lambda_1 w_1 + \lambda_2 w_2} = \lambda_1\braket{v}{w_1} + \lambda_2\braket{v}{w_2}$ (liniowość w drugim argumencie),
-    \item dla $\mathbb{K}=\R$:  $\braket{v}{w}=\braket{w}{v}$ (symetria),
-          dla $\mathbb{K}=\mathbb{C}$: $\braket{v}{w}=\overline{\braket{w}{v}}$ (hermitowskość),
-    \item $\braket{v}{v}>0$ dla $v\neq\vec{0}$ (dodatniość).
+    \item $\braket{v}{\lambda_1 w_1 + \lambda_2 w_2} = \lambda_1\braket{v}{w_1} + \lambda_2\braket{v}{w_2}$ (\textit{liniowość w drugim argumencie}),
+    \item dla $\mathbb{K}=\R$:  $\braket{v}{w}=\braket{w}{v}$ (\textit{symetria}),
+          dla $\mathbb{K}=\mathbb{C}$: $\braket{v}{w}=\overline{\braket{w}{v}}$ (\textit{hermitowskość}),
+    \item $\braket{v}{v}>0$ dla $v\neq\vec{0}$ (\textit{dodatniość}).
   \end{enumerate}
   Dla $\mathbb{K}=\R$ iloczyn skalarny sprowadza się do dodatnio-określonej, symetrycznej formy dwuliniowej 
+\end{dfn}
+
+
+\begin{dfn}{Różniczka zewnętrzna}{różniczka_zew}
+  Różniczką zewnętrzną nazywamy przekształcenie $\dd:\Lambda^kM\to\Lambda^{k+1}M$, spełniające następujące własności:
+  \begin{enumerate}
+    \item $C^{\infty}(M)=\Lambda^0M\ni f\mapsto\dd{f}\in \Lambda^1M$, tzn. $\forall_{A\in\mathfrak{X}(M)}\  \dd{f}(A)=A(f)$, czyli funkcji gładkiej przyporządkuje jej 1-formę,
+    \item $\forall_{\omega,\eta\in\Lambda^kM}\,\forall_{a,b\in\R}\ \dd{(a\omega + b\eta)}=a\dd{\omega}+b\dd{\eta}$ (\textit{liniowość})
+    \item $\forall_{\omega\in\Lambda^kM}\,\forall_{\eta\in\Lambda^lM}\ \dd{(\omega\wedge\eta)}=\dd{\omega}\wedge\eta + (-1)^k\omega\wedge\dd{\eta}$ (\textit{gradowana reguła Leibniza})
+    \item $\forall_{\omega\in\Lambda^kM}\ \dd{(\dd{\omega})}=0$ (\textit{nilpotentność})
+  \end{enumerate}
+  Jeśli wyrazimy $k$-formę $\omega$ we współrzędnych lokalnych $(x^1,\ldots,x^n)$:
+  \[
+    \omega = \sum_{1\leq i_1 < \cdots < i_k \leq n} \omega_{i_1,\ldots, i_k}\dd{x}^{i_1}\wedge\cdots\wedge\dd{x}^{i_k}\implies\dd{\omega}=\sum_{1\leq i_1 < \cdots < i_k \leq n} \dd{\omega_{i_1,\ldots, i_k}}\wedge\dd{x}^{i_1}\wedge\cdots\wedge\dd{x}^{i_k},
+  \]
+  gdzie $\dd{\omega_{i_1,\ldots, i_k}}=\sunj\pdv{\omega_{i_1,\ldots, i_k}}{x^j}\dd{x^j}$.
 \end{dfn}
 
 
@@ -450,7 +478,79 @@ Współczynniki tensora metrycznego zapisujemy z dolnymi indeksami. Wyrazy posta
 
 
 
-\subsection{Co to znaczy, że odwzorowanie zachowuje orientację rozmaitości?}{orientacja}
+\subsection{Co to znaczy, że odwzorowanie zachowuje orientację rozmaitości?}\label{sec:orientacja}
+
+\subsection{wzory na tensor metryczny i formę objętości indukowane na podrozmaitości}\label{sec:indukowane_g_vol}
+
+
+\begin{tw}{Tensor metryczny indukowany na podrozmaitości}{g_indukowane}
+Niech $M\subseteq N$ będzie podrozmaitością $N$, taką że $\dim{M}=m$ i $\dim{N}=m+1$, a $\iota\!:M\to N$ zanurzeniem $M$ w $N$. Jeśli $g_N$ jest tensorem metrycznym na $N$, to na jego podstawie indukuje się tensor metryczny $g_M$ na $M$ jako:
+\[
+g_M = \iota^* g_N.
+\]
+\end{tw}
+
+\begin{tw}{Forma objętości indukowana na podrozmaitości}{vol_indukowane}
+  Niech $M\subseteq N$ będzie podrozmaitością $N$, taką że $\dim{M}=m$ i $\dim{N}=m+1$, a $\iota\!:M\to N$ zanurzeniem $M$ w $N$. Jeśli ${vol}_N$ jest formą objętości na $N$, to na jej podstawie indukuje się formę objętości ${vol}_M$ na $M$ jako:
+  \[
+  {vol}_M = \iota^*(\vec{n}\intprod {vol}_N),
+  \]
+  gdzie $\vec{n}$ jest wersorem normalnym do $M$.
+\end{tw}
+
+Korzystając z tw. \ref{thm:g_indukowane} można również zapisać formę objętości ${vol}_M$ we współrzędnych $(x^1,\ldots,x^m)$ z dokładnością do znaku jako ${vol}_M=\pm\sqrt{\det(\iota^* g_N)}\dd{x^1}\wedge\cdots\wedge\dd{x^m}$.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{gradient, dywergencja, rotacja}\label{sec:operatory_różniczkowe}
+
+\begin{dfn}{Gradient}{gradient}
+  Jeśli $f$ jest funkcją gładką na rozmaitości riemannowskiej $M$ (na rozmaitości gładkiej wyposażonej w tensor metryczny $g$), to gradientem funkcji $f$ nazywamy pole wektorowe $\nabla{f}$, takie że
+  \[
+  \forall_{A\in\mathfrak{X}(M)}\ \nabla{f}\intprod g = \dd{f}(A) = A(f),\text{ czyli } \nabla{f} = g^{-1}\dd{f} = g^{ij}\pdv{f}{x^j}\pdv{x^i}.
+  \]
+\end{dfn}
+
+Według innych notacji, zwężenie $\nabla{f}\intprod g$ można też było zapisać jako $\iota_{\nabla{f}} g$, $\flat(\nabla f)$ lub $g(\nabla f,\,\cdot\,)$.
+
+\begin{dfn}{Dywergencja}{dywergencja}
+  Dywergencją $\nabla\!\cdot\! A$ pola wektorowego $A$ na rozmaitości różniczkowalnej $M$, wyposażonej w formę objętości, nazywamy odwzorowanie $\mathfrak{X}(M)\ni A\mapsto \nabla\!\cdot\! A\in C^\infty(M)$, takie że
+  \[
+  \dd{(A\intprod vol)} = (\nabla\!\cdot\! A)\, vol.
+  \]
+  We współrzędnych lokalnych $(x^1,\ldots,x^n)$ wzór na dywergencję przyjmuje postać:
+  \[
+  \nabla\!\cdot\! A = \suni \frac{1}{\sqrt{\det g}} \pdv{(\sqrt{\det g} A^i)}{x^i}.
+  \]
+\end{dfn}
+
+\begin{dfn}{Rotacja}{rotacja}
+  Na \textit{trójwymiarowej} rozmaitości riemannowskiej $M$ definiuje się rotację $\nabla\!\times\!A$ pola wektorowego $A$ jako przekształcenie $\mathfrak{X}(M)\ni A\mapsto \nabla\!\times\! A\in \mathfrak{X}(M)$, takie że
+  \[
+  (\nabla\!\times\!A)\intprod vol = \dd{(A\intprod g)}.
+  \]
+  We współrzędnych lokalnych $(x^1,\ldots,x^n)$ wzór na rotację przyjmuje postać:
+  \[
+  \nabla\!\times\!A = \frac{\epsilon^{jka}}{\sqrt{\det g}}\pdv{(g_{ki} A^i)}{x^j}\pdv{x^a}.
+  \]
+\end{dfn}
 
 
 
