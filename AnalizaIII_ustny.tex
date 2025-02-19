@@ -483,14 +483,14 @@ Współczynniki tensora metrycznego zapisujemy z dolnymi indeksami. Wyrazy posta
 \subsection{wzory na tensor metryczny i formę objętości indukowane na podrozmaitości}\label{sec:indukowane_g_vol}
 
 
-\begin{tw}{Tensor metryczny indukowany na podrozmaitości}{g_indukowane}
+\begin{tw}{o tensorze metrycznym indukowanym na podrozmaitości}{g_indukowane}
 Niech $M\subseteq N$ będzie podrozmaitością $N$, taką że $\dim{M}=m$ i $\dim{N}=m+1$, a $\iota\!:M\to N$ zanurzeniem $M$ w $N$. Jeśli $g_N$ jest tensorem metrycznym na $N$, to na jego podstawie indukuje się tensor metryczny $g_M$ na $M$ jako:
 \[
 g_M = \iota^* g_N.
 \]
 \end{tw}
 
-\begin{tw}{Forma objętości indukowana na podrozmaitości}{vol_indukowane}
+\begin{tw}{o formie objętości indukowanej na podrozmaitości}{vol_indukowane}
   Niech $M\subseteq N$ będzie podrozmaitością $N$, taką że $\dim{M}=m$ i $\dim{N}=m+1$, a $\iota\!:M\to N$ zanurzeniem $M$ w $N$. Jeśli ${vol}_N$ jest formą objętości na $N$, to na jej podstawie indukuje się formę objętości ${vol}_M$ na $M$ jako:
   \[
   {vol}_M = \iota^*(\vec{n}\intprod {vol}_N),
@@ -498,7 +498,9 @@ g_M = \iota^* g_N.
   gdzie $\vec{n}$ jest wersorem normalnym do $M$.
 \end{tw}
 
-Korzystając z tw. \ref{thm:g_indukowane} można również zapisać formę objętości ${vol}_M$ we współrzędnych $(x^1,\ldots,x^m)$ z dokładnością do znaku jako ${vol}_M=\pm\sqrt{\det(\iota^* g_N)}\dd{x^1}\wedge\cdots\wedge\dd{x^m}$.
+Korzystając z tw. \ref{thm:g_indukowane} można również zapisać formę objętości ${vol}_M$ we współrzędnych $(x^1,\ldots,x^m)$ z dokładnością do znaku jako ${vol}_M=\pm\sqrt{\det(\iota^* g_N)}\dd{x^1}\wedge\cdots\wedge\dd{x^m}$. 
+
+Jeżeli rozmaitość $M$ jest dana jako zbiór $\set{(x^1,\ldots,x^{m+1})\in N|f(x^1,\ldots,x^{m+1})=\text{const.}}$, to wektor normalny $\vec{N_p}$ do $M$ w punkcie $p$ można uzyskać za pomocą wartości gradientu $f$ w tym punkcie: $\vec{N_p} = \at{\nabla f}{p}$.
 
 
 
@@ -531,7 +533,7 @@ Korzystając z tw. \ref{thm:g_indukowane} można również zapisać formę obję
 Według innych notacji, zwężenie $\nabla{f}\intprod g$ można też było zapisać jako $\iota_{\nabla{f}} g$, $\flat(\nabla f)$ lub $g(\nabla f,\,\cdot\,)$.
 
 \begin{dfn}{Dywergencja}{dywergencja}
-  Dywergencją $\nabla\!\cdot\! A$ pola wektorowego $A$ na rozmaitości różniczkowalnej $M$, wyposażonej w formę objętości, nazywamy odwzorowanie $\mathfrak{X}(M)\ni A\mapsto \nabla\!\cdot\! A\in C^\infty(M)$, takie że
+  Dywergencją pola wektorowego na rozmaitości różniczkowalnej $M$, wyposażonej w formę objętości, nazywamy odwzorowanie $\mathfrak{X}(M)\ni A\mapsto \nabla\!\cdot\! A\in C^\infty(M)$, takie że
   \[
   \dd{(A\intprod vol)} = (\nabla\!\cdot\! A)\, vol.
   \]
@@ -542,7 +544,7 @@ Według innych notacji, zwężenie $\nabla{f}\intprod g$ można też było zapis
 \end{dfn}
 
 \begin{dfn}{Rotacja}{rotacja}
-  Na \textit{trójwymiarowej} rozmaitości riemannowskiej $M$ definiuje się rotację $\nabla\!\times\!A$ pola wektorowego $A$ jako przekształcenie $\mathfrak{X}(M)\ni A\mapsto \nabla\!\times\! A\in \mathfrak{X}(M)$, takie że
+  Na \textit{trójwymiarowej} rozmaitości riemannowskiej $M$ definiuje się rotację pola wektorowego jako przekształcenie $\mathfrak{X}(M)\ni A\mapsto \nabla\!\times\! A\in \mathfrak{X}(M)$, takie że
   \[
   (\nabla\!\times\!A)\intprod vol = \dd{(A\intprod g)}.
   \]
@@ -554,6 +556,92 @@ Według innych notacji, zwężenie $\nabla{f}\intprod g$ można też było zapis
 
 
 
+
+
+
+
+
+\subsection{Całka z n-formy po rozmaitości, z funkcji po rozmaitości, z pola wektorowego po krzywej, z pola wektorowego po powierzchni 2-wymiarowej zanurzonej w przestrzeni 3-wymiarowej}
+
+
+\begin{dfn}{Całkowanie form różniczkowych}{całkowanie_form}
+Niech $\omega$ będzie $n$-formą różniczkową na $n$-wymiarowej rozmaitości różniczkowej $M$ z dodatnio zorientowaną mapą $\phi$. Całkę formy $\omega$ po rozmaitości $M$ definiujemy jako:
+\[
+\int_M{\omega} = \int_{\phi^{-1}(M)}{\!(\phi^{-1})^*\omega}.
+\]
+Jeśli jedna mapa nie jest wystarczająca do pokrycia rozmaitości, to sięga się po dodatnio zorientowany atlas $\set{\phi_i}$, wówczas:
+\[
+\int_M{\omega} = \sum_{i} \int_{\phi^{-1}_i(M)}{\!(\phi^{-1}_i)^*\omega}.
+\]
+W przypadku gdy mapy zorientowane są przeciwnie do ustalonej orientacji rozmaitości, to w powyższych wzorach pojawia się znak minus. 
+\end{dfn}
+
+Resztę zagadnień omówię skrótowo. Pod hasłem całka funkcji po rozmaitości najpewniej się kryje całka postaci $\int_M{f\cdot vol_{M}}$, gdzie $f:M\to\R$.
+
+Jeśli $M$ to rozmaitość różniczkowa wymiaru $n$, $\vec{A}$ to pole wektorowe na niej, a $K$ jest krzywą zanurzoną w $M$, wówczas całkowanie $\vec{A}$ po krzywej $K$ definiujemy jako $$\int_{K} \vec{A}\cdot\dd{\vec{r}}:=\int_{K}\iota^*(\vec{A}\intprod g_{\,\R^n}).$$ 
+
+Zmieńmy teraz wymiar rozmaitości $\dim{M}=3$ i zanurzmy w niej dwuwymiarową powierzchnię $\Sigma$. Strumieniem pola $\vec{A}$ przez powierzchnię $\Sigma$ jest $$\int_{\Sigma}\vec{A}\cdot\dd{\vec{S}}:=\int_{\Sigma}\iota^*(\vec{A}\intprod vol_{\R^3}).$$
+
+\subsection{Potencjał k-formy, potencjał skalarny pola wektorowego, potencjał wektorowy pola wektorowego}
+
+
+
+\begin{dfn}{Potencjał formy różniczkowej}{potencjał_formy}
+  Rozważmy dwie formy różniczkowe $\omega\in\Lambda^k M$ i $\alpha\in\Lambda^{k-1}M$, mówimy, że $\alpha$ jest potencjałem $k$-formy różniczkowej, jeśli
+  \[
+  \omega = \dd{\alpha}.
+  \]
+\end{dfn}
+
+\begin{dfn}{Potencjał skalarny}{potencjał_skalarny}
+  Mówimy, że funkcja $\varphi\in C^{\infty}(M)$ jest potencjałem skalarnym pola wektorowego $V\in\mathfrak{X}(M)$, jeżeli
+  \[
+  V = -\nabla \varphi.
+  \]
+\end{dfn}
+
+\begin{dfn}{Potencjał wektorowy}{potencjał_wektorowy}
+  Pole wektorowe $A$ jest potencjałem wektorowym pola $V$, gdy
+  \[
+  V=\nabla\!\times\!A.
+  \]
+\end{dfn}
+Warto zauważyć, że potencjały nie są odwzorowaniami określonymi jednoznacznie.
+
+\begin{tw}{o potencjalności pól wektorowych}{potencjalność_pól}
+  Pole wektorowe $V\in\mathfrak{X}(M)$ jest potencjalne, tj. posiada potencjał skalarny, \textit{wtedy i tylko wtedy, gdy} dla dowolnych punktów $p,q\in M$ całka $\int_K \vec{V}\cdot\dd{\vec{r}}$ nie zależy od wyboru krzywej $K$ łączącej te dwa punkty.\vspace{5pt}
+
+  Wynika z tego, że pole wektorowe jest potencjalne \textit{wtedy i tylko wtedy, gdy} każda jego cyrkulacja jest równa zeru, tj. $\oint_K \vec{V}\cdot\dd{\vec{r}}=0$, dla każdej krzywej zamkniętej $K$.
+
+\end{tw}
+
+\begin{tw}{o potencjalności jednoform}{potencjalność_jednoform}
+  Jednoforma $\omega\in\Lambda^1M$ jest potencjalna, tj. posiada potencjał, \textit{wtedy i tylko wtedy, gdy} dla dowolnych punktów $p,q\in M$ całka $\int_K \omega$ nie zależy od wyboru krzywej $K$ łączącej te dwa punkty.\vspace{5pt}
+
+  Wynika z tego, że jednoforma jest potencjalna \textit{wtedy i tylko wtedy, gdy} $\oint_K \omega=0$, dla każdej krzywej zamkniętej $K$.
+\end{tw}
+
+Twierdzenie \ref{thm:potencjalność_pól}. jest konsekwencją twierdzenia \ref{thm:potencjalność_jednoform}., wystarczy podstawić $\omega=V\intprod g\in \Lambda^1M$.
+
+
+
+
+
+\subsection{Lemat Poincarégo}
+
+
+
+
+\subsection{twierdzenie Greena, Stokesa, Gaussa (na formach i polach wektorowych) z dowodami}
+
+Jest w skrypcie Alatosa (\url{https://www.fuw.edu.pl/~alatos/analiza-wyklady.pdf} str. 1 -- 6).
+
+
+
+
+
+
+\section*{\centering ANALIZA ZESPOLONA}
 
 
 
